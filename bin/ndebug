@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const yargs = require('yargs')
+const lib = require('../lib')
+
+const argv = yargs
+  .usage('ndebug <options> file')
+  .option('nobrk', {
+    default: false,
+    description: '启动不加断点'
+  })
+  .version()
+  .help()
+  .argv
+
+console.log(argv)
+console.log(process.argv)
+
+lib.checkEnv()
+lib.exec(argv._[0], argv.nobrk, process.argv.slice(2))
